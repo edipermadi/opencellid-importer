@@ -1,1 +1,4 @@
 /.idea/
+/*.db
+/*.db-journal
+*.pyc
