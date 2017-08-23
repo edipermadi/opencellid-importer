@@ -6,7 +6,7 @@ A python script to convert OpenCellid CSV file to sqlite database
 ## Usage
 
 ```
-$ python importer.py --db path-to-database.db --csv path-to-file.csv
+$ python importer.py --db path-to-database.db --csv path-to-file.csv --mcc 525
 ```
 
 ## Possible Radio values
