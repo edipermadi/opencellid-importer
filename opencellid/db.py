@@ -1,5 +1,5 @@
 import sqlite3
-
+import sys
 CREATE_TABLE_SQL = '''
 CREATE TABLE IF NOT EXISTS cells (
     id integer PRIMARY KEY AUTOINCREMENT,
@@ -20,13 +20,13 @@ CREATE TABLE IF NOT EXISTS cells (
 );'''
 
 CREATE_INDEX_SQLS = (
-    'CREATE INDEX cell_radio ON cells (radio);',
-    'CREATE INDEX cell_mcc_net ON cells (mcc, net);',
-    'CREATE INDEX cell_radio_mcc_net ON cells (radio, mcc, net);',
-    'CREATE INDEX cell_area_cell ON cells (area, cell);',
-    'CREATE INDEX cell_radio_area_cell ON cells (radio, area, cell);',
-    'CREATE INDEX cell_mcc_net_area_cell ON cells (mcc, net, area, cell);',
-    'CREATE INDEX cell_radio_mcc_net_area_cell ON cells (radio, mcc, net, area, cell);'
+    'CREATE INDEX IF NOT EXISTS cell_radio ON cells (radio);',
+    'CREATE INDEX IF NOT EXISTS cell_mcc_net ON cells (mcc, net);',
+    'CREATE INDEX IF NOT EXISTS cell_radio_mcc_net ON cells (radio, mcc, net);',
+    'CREATE INDEX IF NOT EXISTS cell_area_cell ON cells (area, cell);',
+    'CREATE INDEX IF NOT EXISTS cell_radio_area_cell ON cells (radio, area, cell);',
+    'CREATE INDEX IF NOT EXISTS cell_mcc_net_area_cell ON cells (mcc, net, area, cell);',
+    'CREATE INDEX IF NOT EXISTS cell_radio_mcc_net_area_cell ON cells (radio, mcc, net, area, cell);'
 )
 
 
@@ -51,7 +51,8 @@ class CellIdDatabase(object):
 
     def insert(self, values):
         self.counter += 1
-
-        print "insert #{}".format(self.counter)
-        self.conn.executemany(INSERT_ENTRY_SQL, values)
+        sys.stderr.write("insert #{}\n".format(self.counter))
+        cur = self.conn.cursor()
+        cur.executemany(INSERT_ENTRY_SQL, values)
         self.conn.commit()
+        sys.stderr.write("wrote {} rows\n".format(cur.rowcount))
