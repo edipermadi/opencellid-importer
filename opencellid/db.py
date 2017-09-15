@@ -2,7 +2,7 @@ import sqlite3
 import sys
 CREATE_TABLE_SQL = '''
 CREATE TABLE IF NOT EXISTS cells (
-    id integer PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     radio VARCHAR(16) NOT NULL,
     mcc INTEGER NOT NULL,
     net INTEGER NOT NULL,
