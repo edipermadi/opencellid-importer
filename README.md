@@ -17,3 +17,5 @@ $ python importer.py --db path-to-database.db --csv path-to-file.csv --mcc 525
 ## Documentation
 
 - [Radio Values](doc/radio-values.md)
+- [CSV File Format](doc/csv-file-format.md)
+- [Database Schema](doc/database-schema.md)
