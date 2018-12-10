@@ -18,9 +18,9 @@ def do_import(db_filename, csv_filename, mcc = None):
 
     def _open(fn):
         if fnmatch.fnmatch(fn, '*.gz'):
-            return gzip.open(fn)
+            return gzip.open(fn,'rt')
         else:
-            return open(fn)
+            return open(fn,'rt')
 
     with _open(csv_filename) as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='"')
